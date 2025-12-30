@@ -1,0 +1,30 @@
+let
+    startDate = #date(2023, 1, 16),
+    endDate = #date(2024, 1, 15),
+
+    getMonthNameAndYear = (date) =>
+        let
+            monthNumber = if Date.Day(date) < 16 then Date.Month(Date.AddMonths(date, -1)) else Date.Month(date),
+            yearNumber = if Date.Day(date) < 16 then Date.Year(Date.AddMonths(date, -1)) else Date.Year(date),
+            monthName = Date.ToText(#date(yearNumber, monthNumber, 16), "MMMM"),
+            monthYear = monthName & " " & Text.From(yearNumber)
+        in
+            monthYear,
+
+    calendarTable = Table.FromColumns(
+        {
+            List.Dates(startDate, Duration.Days(endDate - startDate) + 1, #duration(1, 0, 0, 0)),
+            List.Transform(List.Dates(startDate, Duration.Days(endDate - startDate) + 1, #duration(1, 0, 0, 0)), getMonthNameAndYear)
+        },
+        {"Data", "Nome do Mês e Ano"}
+    ),
+    #"Coluna Duplicada" = Table.DuplicateColumn(calendarTable, "Nome do Mês e Ano", "Nome do Mês e Ano - Copiar"),
+    #"Texto Extraído Antes do Delimitador" = Table.TransformColumns(#"Coluna Duplicada", {{"Nome do Mês e Ano", each Text.BeforeDelimiter(_, " "), type text}}),
+    #"Texto Extraído Após o Delimitador" = Table.TransformColumns(#"Texto Extraído Antes do Delimitador", {{"Nome do Mês e Ano - Copiar", each Text.AfterDelimiter(_, " "), type text}}),
+    #"Tipo Alterado" = Table.TransformColumnTypes(#"Texto Extraído Após o Delimitador",{{"Nome do Mês e Ano - Copiar", Int64.Type}}),
+    #"Colunas Renomeadas" = Table.RenameColumns(#"Tipo Alterado",{{"Nome do Mês e Ano", "Nome do Mês"}}),
+    #"Personalização Adicionada" = Table.AddColumn(#"Colunas Renomeadas", "Mês", each if [Nome do Mês] = "janeiro" then "01" else if [Nome do Mês] = "fevereiro" then "02" else if [Nome do Mês] = "março" then "03" else if [Nome do Mês] = "abril" then "04" else if [Nome do Mês] = "maio" then "05" else if [Nome do Mês] = "junho" then "06" else if [Nome do Mês] = "julho" then "07" else if [Nome do Mês] = "agosto" then "08" else if [Nome do Mês] = "setembro" then "09" else if [Nome do Mês] = "outubro" then 10 else if [Nome do Mês] = "novembro" then 11 else if [Nome do Mês] = "dezembro" then 12 else null),
+    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Personalização Adicionada",{{"Data", type date}}),
+    #"Colunas Renomeadas1" = Table.RenameColumns(#"Tipo Alterado1",{{"Nome do Mês e Ano - Copiar", "Ano"}})
+in
+    #"Colunas Renomeadas1"

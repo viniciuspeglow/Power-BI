@@ -1,0 +1,83 @@
+===================================================
+Criar Tabela calendário com linguagem M
+===================================================
+
+let
+	DataInicial = Date.StartOfYear(List.Min(SC5010_PEDIDOSVENDA[C5_EMISSAO])),
+	DataFinal = Date.EndOfYear(List.Max(SC5010_PEDIDOSVENDA[C5_EMISSAO])),
+	QtdeDias = Duration.Days(DataFinal-DataInicial)+1,
+	ListaDatas = List.Dates(DataInicial, QtdeDias, #duration(1,0,0,0))
+
+in
+	ListaDatas
+	
+===================================================
+Criar Tabela calendário com linguagem M Completa
+===================================================
+let
+	Data = Vendas[Data Pedido],
+	DataInicial = Date.StartOfYear(List.Min(Data)),
+	DataFinal = Date.EndOfYear(List.Max(Data)),
+	QtdeDias = Number.From(DataFinal - DataInicial)+1,
+	ListaDatas = List.Dates(DataInicial, QtdeDias, #duration(1,0,0,0)),
+    #"Convertido para Tabela" = Table.FromList(ListaDatas, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+    #"Tipo Alterado" = Table.TransformColumnTypes(#"Convertido para Tabela",{{"Column1", type date}}),
+    #"Colunas Renomeadas" = Table.RenameColumns(#"Tipo Alterado",{{"Column1", "Data"}}),
+    #"Ano Inserido" = Table.AddColumn(#"Colunas Renomeadas", "Ano", each Date.Year([Data]), Int64.Type),
+    #"Mês Inserido" = Table.AddColumn(#"Ano Inserido", "Mês", each Date.Month([Data]), Int64.Type),
+    #"Nome do Mês Inserido" = Table.AddColumn(#"Mês Inserido", "Nome do Mês", each Date.MonthName([Data]), type text),
+    #"Dia Inserido" = Table.AddColumn(#"Nome do Mês Inserido", "Dia", each Date.Day([Data]), Int64.Type),
+    #"Nome do Dia Inserido" = Table.AddColumn(#"Dia Inserido", "Nome do Dia", each Date.DayOfWeekName([Data]), type text),
+    #"Trimestre Inserido" = Table.AddColumn(#"Nome do Dia Inserido", "Trimestre", each Date.QuarterOfYear([Data]), Int64.Type)
+
+in
+	#"Trimestre Inserido"
+	
+===================================================
+Criar Tabela calendário com linguagem M (FISCAL)
+===================================================	
+let
+    Fonte = Calendario,
+    #"Outras Colunas Removidas" = Table.SelectColumns(Fonte,{"Data"}),
+    #"Personalização Adicionada" = Table.AddColumn(#"Outras Colunas Removidas", "Data Fiscal", each Date.AddMonths([Data],-6)),
+    #"Ano Inserido" = Table.AddColumn(#"Personalização Adicionada", "Ano", each Date.Year([Data Fiscal]), Int64.Type),
+    #"Ano Inserido1" = Table.AddColumn(#"Ano Inserido", "Ano.1", each Date.Year([Data]), Int64.Type),
+    #"Colunas Mescladas" = Table.CombineColumns(Table.TransformColumnTypes(#"Ano Inserido1", {{"Ano", type text}, {"Ano.1", type text}}, "pt-BR"),{"Ano", "Ano.1"},Combiner.CombineTextByDelimiter("/", QuoteStyle.None),"Ano Fiscal"),
+    #"Nome do Mês Inserido" = Table.AddColumn(#"Colunas Mescladas", "Nome do Mês", each Date.MonthName([Data]), type text),
+    #"Mês Inserido" = Table.AddColumn(#"Nome do Mês Inserido", "Mês", each Date.Month([Data Fiscal]), Int64.Type),
+    #"Trimestre Inserido" = Table.AddColumn(#"Mês Inserido", "Trimestre", each Date.QuarterOfYear([Data Fiscal]), Int64.Type),
+    #"Prefixo Adicionado" = Table.TransformColumns(#"Trimestre Inserido", {{"Trimestre", each "T" & Text.From(_, "pt-BR"), type text}})
+in
+    #"Prefixo Adicionado"
+
+===================================================
+Criar Tabela calendário com linguagem DAX
+===================================================
+
+CalendarioDAX =
+CALENDAR ( MIN ( SF2010[F2_EMISSAO] ); MAX ( SF2010[F2_EMISSAO] ) )
+
+Dia =
+DAY ( 'CalendarioDAX'[Date] )
+
+Mês =
+MONTH( 'CalendarioDAX'[Date] )
+
+Ano =
+YEAR( 'CalendarioDAX'[Date] )
+
+DiaSemana =
+FORMAT ( 'CalendarioDAX'[Date]; "ddd" )
+
+MêsNome =
+FORMAT( 'CalendarioDAX'[Date];"mmmm" )
+
+MêsCurto =
+FORMAT( 'CalendarioDAX'[Date];"mmm" )
+
+Trimestre =
+FORMAT( 'CalendarioDAX'[Date];"q" ) & "T"
+
+Trim/Ano =
+CalendarioDAX[Trimestre] & CalendarioDAX[Ano]
+
