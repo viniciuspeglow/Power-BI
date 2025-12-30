@@ -1,0 +1,16 @@
+// HASONEVALUE = Tem Um Valor
+// Nesse caso vamos indicar se o ele esta olhando um unico valor ou varios valores, no caso do total seria varios valores
+
+Ranking das Marcas = 
+IF(
+    HASONEVALUE('Cadastro Produtos'[Nome da Marca]),
+    RANKX(ALL('Cadastro Produtos'[Nome da Marca]),[Total Vendas]),""
+)
+
+
+// com o ALLSELECTED ELE pega os filtros que estao sendo realizados 
+Ranking das Marcas = 
+IF(
+    HASONEVALUE('Cadastro Produtos'[Nome da Marca]),
+    RANKX(ALLSELECTED('Cadastro Produtos'[Nome da Marca]),[Total Vendas])
+)

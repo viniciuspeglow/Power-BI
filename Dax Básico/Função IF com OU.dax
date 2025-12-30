@@ -1,0 +1,9 @@
+// O || equivale a "OU"
+
+Dia Útil/Fim de Semana = 
+IF(
+    dCalendario[Dia da Semana] = 0 ||
+    dCalendario[Dia da Semana] = 6,
+    "Fim de Semana",
+    "Dia útil"
+)

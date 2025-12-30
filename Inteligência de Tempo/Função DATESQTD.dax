@@ -1,0 +1,6 @@
+// Faz o acumulado ao longo do TRIMESTRE, quando muda o trimestre, recomeça o cálculo
+Faturamento YTD = 
+    CALCULATE([Faturamento Total],
+    DATESQTD(dCalendario[Datas])
+    )
+

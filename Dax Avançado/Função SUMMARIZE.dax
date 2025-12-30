@@ -1,0 +1,30 @@
+// Criando uma tabela 
+// Nesse caso ele cria uma tabela resumindo pelo Numero, da venda, nome cliente e Marca, apos isso coloca um titulo ("Total Pago") 
+// para o nome da coluna que ira calcular e por fim coloca o valuclo
+
+Vnedas Resumidas = SUMMARIZE(
+    'Base Vendas Parceladas',
+    'Base Vendas Parceladas'[Num Venda],
+    'Base Vendas Parceladas'[Nome Cliente],
+    'Base Vendas Parceladas'[Marca],
+    "Total Pago",
+    SUM('Base Vendas Parceladas'[Faturamento])
+    )
+
+// Exemplo 02 
+
+Vnedas Resumidas = SUMMARIZE(
+    FILTER(
+        'Base Vendas Parceladas',
+        DATEDIFF(
+            'Base Vendas Parceladas'[Data da Venda],
+            TODAY(),
+            MONTH
+            ) > 'Base Vendas Parceladas'[Total Parcelas]
+        ),
+    'Base Vendas Parceladas'[Num Venda],
+    'Base Vendas Parceladas'[Nome Cliente],
+    'Base Vendas Parceladas'[Marca],
+    "Total Pago",
+    SUM('Base Vendas Parceladas'[Faturamento])
+    )

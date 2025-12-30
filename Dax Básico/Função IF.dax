@@ -1,0 +1,1 @@
+Quinzena = IF(DAY(dCalendario[Datas])<=15,"Quinzena 1","Quinzena 2")

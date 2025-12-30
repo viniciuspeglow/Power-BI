@@ -1,0 +1,6 @@
+// Vai fazer a média do faturamento 
+Faturamento Médio = 
+AVERAGEX(
+    fVendas,
+    fVendas[Qtd Vendida] * RELATED(dProdutos[Preço Unitario])
+)

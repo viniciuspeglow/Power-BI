@@ -1,0 +1,8 @@
+// Vai somar o faturamento em cada uma das linhas e depois somar o total
+Faturamento Total = 
+SUMX(
+    fVendas,
+    fVendas[Qtd Vendida] * fVendas[Preço Unitario]
+    )
+
+

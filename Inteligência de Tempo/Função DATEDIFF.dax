@@ -1,0 +1,11 @@
+// Retona a diferença entre duas datas, podenso ser, em dias, anos, meses, trismestres e outros
+// 1 - argumento =  Data antiga
+// 2 - argumento =  Data mais recente
+// 3 - argumento =  Como sera apresnetado o resultado (nesse exemplo é meses)
+
+Diferença entre duas datas =
+        DATEDIFF(
+            'Base Vendas Parceladas'[Data da Venda],
+            TODAY(),
+            MONTH
+        )

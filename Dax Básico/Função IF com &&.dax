@@ -1,0 +1,7 @@
+Preço Dia das Mães = 
+IF(
+    RELATED(dClientes[Genero]) = "Feminino" 
+    && RELATED(dClientes[Num Filhos]) >= 1 
+    && MONTH(fVendas[Data da Venda]) = 5, 
+    ROUND(RELATED(dProdutos[Preço Unitario]) * 0.85, 2), RELATED(dProdutos[Preço Unitario])
+    )

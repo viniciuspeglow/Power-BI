@@ -1,0 +1,2 @@
+// Conta as linhas da tabela indiferente se está preenchida ou não
+Qtd Clientes = COUNTROWS(dClientes)

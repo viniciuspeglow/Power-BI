@@ -1,0 +1,17 @@
+
+// Vai retornar o número do dia da semana.
+Dia da Semana = WEEKDAY(Calendario[Datas]) 
+
+// Para achar se é dia de semana ou final de semana (poderia fazer tambem com o nome do dia - Sabado/domingo)
+Tipo do Dia = IF(Calendario[Dia da Semana] = 1 || Calendario[Dia da Semana] = 7 , "Fim de Semana" ,  "Dia de Semana")
+
+// Puxar o feriado da tabela feriado
+Feriados = RELATED(Feriados[Feriado])
+
+// para descobrir se o dia é util ou não
+Dia Util = 
+    IF(
+        Calendario[Tipo do Dia] = "Dia de Semana" && Calendario[Feriados] = BLANK(),
+        1,
+        0
+    )

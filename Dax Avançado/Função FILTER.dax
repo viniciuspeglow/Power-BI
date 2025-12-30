@@ -1,0 +1,20 @@
+Total de vendas Ticket > 100 =
+SUMX(
+    //Primeiro argumento será a tabela que nesse caso é um Filter
+    FILTER(
+        'Base Vendas',
+        'Base Vendas'[Preco Unitario] > 100
+    ),
+    // Segunda argumento é oque quer somar/dividir/min/max
+    'Base Vendas'[Quantidade Vendida]
+)
+
+// Usando uma medida dentro do FILTER
+Quantidade de vendas > 1000 Fat =
+    COUNTX(
+        FILTER(
+            'Base Vendas',
+            [Faturamento Total] > 1000
+        ),
+        'Base Vendas'[Quantidade Vendida]
+    )

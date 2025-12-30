@@ -1,0 +1,16 @@
+// Comparação entre periodos
+
+// Comparando Mês atual com o Mês anterior 
+Faturamento MoM = 
+    CALCULATE([Faturamento Total],
+    DATEADD(dCalendario[Datas],-1,MONTH)
+    )
+
+// Com isso podemos criar uma formua para achar o percentual de crescimento.
+% Crescimento MoM = DIVIDE([Faturamento Total]-[Faturamento MoM],[Faturamento MoM],"Sem Dados")
+
+// Comparando Ano atual com o Ano anterior 
+Faturamento YoY = 
+    CALCULATE([Faturamento Total],
+    DATEADD(dCalendario[Datas],-1,YEAR)
+    )

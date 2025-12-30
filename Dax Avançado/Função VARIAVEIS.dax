@@ -1,0 +1,33 @@
+% Meses Acima da Meta = 
+
+var qtd_acima_da_meta = 
+COUNTROWS(
+    FILTER(
+        VALUES(Calendario[Mes/Ano]),
+        [Faturamento Total] >= 200000000
+    )
+)
+
+var qtd_total_de_meses =
+DISTINCTCOUNT(Calendario[Mes/Ano])
+
+RETURN
+qtd_acima_da_meta / qtd_total_de_meses
+
+
+//===================================================
+// Exemplo 02
+//===================================================
+% de Marcas dentro da Meta de Devolução = 
+VAR qtd_marcas_dentro_da_meta = 
+    COUNTROWS(
+        FILTER(
+            VALUES('Cadastro Produtos'[Nome da Marca]),
+            ([Total Devolucoes] / [Total Vendas]) <= 0.0115
+        )
+    )
+
+VAR qtd_marcas_total =
+    DISTINCTCOUNT('Cadastro Produtos'[Nome da Marca])
+RETURN
+qtd_marcas_dentro_da_meta / qtd_marcas_total

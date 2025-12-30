@@ -1,0 +1,10 @@
+
+// o USERELATIONSHIP serve para ativar os relacionamentos "inativos"
+
+Total Envios = 
+CALCULATE(
+    [Total Vendas],
+    USERELATIONSHIP(
+        'Base Vendas'[Data do Envio],
+        Calendario[Datas])
+)

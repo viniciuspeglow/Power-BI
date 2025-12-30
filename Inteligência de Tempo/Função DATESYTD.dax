@@ -1,0 +1,12 @@
+// Faz o acumulado ao longo do ANO, quando muda o ano, recomeça o cálculo
+Faturamento YTD = 
+    CALCULATE([Faturamento Total],
+    DATESYTD(dCalendario[Datas])
+    )
+
+//Usado caso o ano fiscal da empresa termine em outro mês, nesse exemplo usei março 
+//3 = Mês e 31 = último dia do mês
+Faturamento YTD = 
+    CALCULATE([Faturamento Total],
+    DATESYTD(dCalendario[Datas],"3/31")
+    )

@@ -1,0 +1,5 @@
+
+// SAMEPERIODLASTYEAR =  Serve para calcular o total de algo (Nesse caso foi de clientes) do ano anterior
+Total clientes Ano Anterior = 
+    CALCULATE([Total Clientes Distintos],
+    SAMEPERIODLASTYEAR(Calendario[Datas]))

@@ -1,0 +1,6 @@
+Bimestre = 
+IF(dCalendario[Mês] <= 2,"Bimestre 1",
+IF(dCalendario[Mês] <= 4,"Bimestre 2",
+IF(dCalendario[Mês] <= 6,"Bimestre 3",
+IF(dCalendario[Mês] <= 8,"Bimestre 4",
+IF(dCalendario[Mês] <= 10,"Bimestre 5","Bimestre 6")))))

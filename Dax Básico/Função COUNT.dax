@@ -1,0 +1,2 @@
+// Conta os Valores Preenchidos
+Qtd Clientes = COUNT(dClientes[ID Cliente])

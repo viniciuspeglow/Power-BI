@@ -1,0 +1,4 @@
+// Faz o acumulado ao longo do TRIMESTRE, quando muda o trimestre, recomeça o cálculo
+// igual a DATESQTD
+Faturamento MTD 2 = 
+    TOTALQTD([Faturamento Total],dCalendario[Datas])

@@ -1,0 +1,2 @@
+// Mais usado para afzer calculo em tabela, para buscar uma informação de outra tabela
+Preço Unitário = RELATED(dProdutos[Preço Unitario])

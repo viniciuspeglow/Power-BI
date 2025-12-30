@@ -1,0 +1,40 @@
+
+//===================================================
+// Exemplo 01
+//===================================================
+
+// Vai fazer a Média de faturamento por Loja e por Mês/Ano
+Média de Faturamento por Loja po Mês = 
+AVERAGEX(
+    CROSSJOIN(
+        VALUES('Cadastro Lojas'[Nome da Loja]),
+        VALUES(Calendario[Mes/Ano])
+    ),
+    [Faturamento Total]
+)
+
+
+//===================================================
+// Exemplo 02
+//===================================================
+
+// Vai retornar o Máximo que o Clinete gastou em um Ano
+Máximo que um Cliente Já Gastou = 
+MAXX(
+    CROSSJOIN(
+        VALUES('Cadastro Clientes'[ID Cliente]),
+        VALUES(Calendario[Ano])
+        ),
+        [Faturamento Total]
+)
+
+//===================================================
+// Exemplo 03
+//===================================================
+
+// Vai montar uma tabela com o nome da Loja e os Meses/Anos
+Meses e Lojas = 
+CROSSJOIN(
+    VALUES('Cadastro Lojas'[Nome da Loja]),
+    VALUES(Calendario[Mes/Ano])
+)

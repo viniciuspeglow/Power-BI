@@ -1,0 +1,5 @@
+// 01 - Exemplo:  Ranking por produto de forma Simples
+Ranking Produto = RANKX(ALL('Cadastro Produtos'),[Total Vendas])
+
+// 02 - Exemplo: Ranking por Marca de forma Simples
+Raking Marcas = RANKX(ALL('Cadastro Produtos'[Nome da Marca]),[Total Vendas])

@@ -1,0 +1,19 @@
+// Função ALL Remove todos os filtros do contexto
+Total de vendas Absoluto = 
+CALCULATE(
+    [Total Vendas],
+    ALL(dProdutos[Tipo do Produto])
+)
+
+// Exemplo Com um nivel apenas na matriz pegando pela Loja
+Faturamento (Absoluto) = CALCULATE(
+    [Faturamento Total],
+    ALL(dLojas)
+)
+
+// Exemplo com dois niveis (Continente e País) na matriz
+// Nesse exemplo ele fara apenas om o pais mantendo 100% em cada continente 
+Faturamento (Absoluto) = CALCULATE(
+    [Faturamento Total],
+    ALL(dLojas[País])
+)

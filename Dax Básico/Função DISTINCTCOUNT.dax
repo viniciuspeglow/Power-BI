@@ -1,0 +1,2 @@
+// Contagem distinta de uma coluna
+Qtd Clientes que Compraram = DISTINCTCOUNT(fVendas[ID Cliente])

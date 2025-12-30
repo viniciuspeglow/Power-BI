@@ -1,0 +1,24 @@
+//===================================================
+// Exemplo 01
+//===================================================
+Qtde Meses Acima da Meta = 
+COUNTROWS(
+    FILTER(
+        VALUES(Calendario[Mes/Ano]),
+        [Faturamento Total] >= 200000000
+    )
+)
+
+// O VALUES  nesse caso foi usado para criar a tabela dentro do FILTER
+
+//===================================================
+// Exemplo 02
+//===================================================
+Qtd de Marcas dentro da Meta = 
+    COUNTROWS(
+        FILTER(
+            VALUES('Cadastro Produtos'[Nome da Marca]),
+            ([Total Devolucoes] / [Total Vendas]) <= 0.0115
+        )
+    )
+

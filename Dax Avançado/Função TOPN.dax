@@ -1,0 +1,21 @@
+// Exemplo 01
+
+Total Vendas top 5 Marcas = 
+IF([Ranking das Marcas]<=5,
+CALCULATE(
+    [Total Vendas],
+    TOPN(
+        5, VALUES('Cadastro Produtos'[Nome da Marca]),[Total Vendas])
+    )
+)
+
+// Exemplo 02
+
+Total Vendas Top N Produtos = 
+IF(
+    [Ranking dos Produtos]<=[Top N Valor],
+CALCULATE(
+    [Total Vendas],
+    TOPN([Top N Valor],VALUES('Cadastro Produtos'[Nome do Produto]),[Total Vendas])
+)
+)

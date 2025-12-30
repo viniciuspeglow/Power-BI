@@ -1,0 +1,14 @@
+// Fazer Taking se for mes ou ano
+
+Ranking de Datas = 
+IF(
+    ISINSCOPE(Calendario[Mes]),
+    RANKX(
+        ALLSELECTED(Calendario[Mes]),
+        [Total Vendas]
+    ),
+    RANKX(
+        ALLSELECTED(Calendario[Ano]),
+        [Total Vendas]
+    )
+)

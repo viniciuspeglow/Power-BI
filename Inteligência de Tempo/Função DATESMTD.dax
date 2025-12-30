@@ -1,0 +1,5 @@
+// Faz o acumulado ao longo do MÊS, quando muda o mês, recomeça o cálculo
+Faturamento MTD = 
+    CALCULATE([Faturamento Total],
+    DATESMTD(dCalendario[Datas])
+    )

@@ -1,0 +1,21 @@
+Média de Faturamento Atual = 
+AVERAGEX(
+    //Nesse momento estou criando uma tabela virtual com os anos da tabela calendário
+    VALUES(Calendario[Ano]),
+    //Pegando uma medida pronta para fazer o cálculo
+    [Faturamento Total]
+)
+
+//Média do faturamento total, pois estou pegando a coluna de Mês/Ano
+Média de faturamento Mensal = 
+AVERAGEX(
+    VALUES(Calendario[Mes/Ano]),
+    [Faturamento Total]
+)
+
+//Máximo do Faturamento total com base no Mês/Ano, ou seja vai me mostrar o Maior faturamento que teve.
+Máximo de Faturamento Mensal =
+MAXX(
+    VALUES(Calendario[Mes/Ano]),
+    [Faturamento Total]
+)

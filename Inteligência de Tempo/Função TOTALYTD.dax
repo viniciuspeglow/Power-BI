@@ -1,0 +1,9 @@
+// Faz o acumulado ao longo do ANO, quando muda o ano, recomeça o cálculo
+// igual a DATESYTD
+Faturamento YTD 2 = 
+    TOTALYTD([Faturamento Total],dCalendario[Datas])
+
+//Usado caso o ano fiscal da empresa termine em outro mês, nesse exemplo usei março 
+//3 = Mês e 31 = último dia do mês
+Faturamento YTD 2 = 
+    TOTALYTD([Faturamento Total],dCalendario[Datas],"3/31")

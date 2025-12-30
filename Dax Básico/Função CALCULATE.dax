@@ -1,0 +1,5 @@
+Vendas Celular = 
+CALCULATE(
+    [Total Vendas],
+    dProdutos[Tipo do Produto] = "Celular"
+)

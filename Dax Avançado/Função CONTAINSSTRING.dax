@@ -1,0 +1,11 @@
+// Utilizado para fazer um filtro com base em parte de um texto, como se fosse o LIKE do SQL,
+// Tem que usar a função CONTAINSSTRING dentro do FILTER
+
+Total Vendas Promoções Ferias = 
+    CALCULATE(
+        [Total Vendas],
+        FILTER(
+            'Cadastro Promocoes',
+            CONTAINSSTRING('Cadastro Promocoes'[Nome Promocao],"Férias")
+        )
+    )

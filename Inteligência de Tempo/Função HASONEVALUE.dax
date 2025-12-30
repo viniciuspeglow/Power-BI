@@ -1,0 +1,6 @@
+// Analisa se existe um unico valor, no caso do TOTAL são varios (False)
+//Em outras palavras, vai ocutar o TOTAL da Matriz por exemplo dw uma determinada coluna
+% Crescimento YoY = 
+IF(HASONEVALUE(dCalendario[Ano]),
+DIVIDE([Faturamento Total]-[Faturamento Ano Anterior],[Faturamento Ano Anterior])
+)
